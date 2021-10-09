@@ -14,7 +14,6 @@ class UserloginController extends Controller
 {
   public function userlogin(Request $request)
   {
-
     if(Session::has('bamaCust')){
         return redirect()->route('webhome');
     }
@@ -38,6 +37,8 @@ class UserloginController extends Controller
     if($custLoginCheck){
       if ($password==$custLoginCheck->user_password) {
         Session::put('bamaCust', $phone);
+        Session::put('customerData', $custLoginCheck);
+        Session::put('webLogin', true);
         Session::save();
         return redirect()->route('webhome');
       }
@@ -54,6 +55,8 @@ class UserloginController extends Controller
   public function logout(Request $request)
   {
    	Session::forget('bamaCust');
+   	Session::forget('customerData');
+   	Session::forget('webLogin');
    	return redirect()->route('userLogin')->withSuccess("User logged out.");
   }
 

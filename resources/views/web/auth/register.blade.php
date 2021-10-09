@@ -4,7 +4,9 @@
         background-color: #EBEBEB !important;
     }
 </style>
-
+@php
+    $settingData = Helper::get_settings();
+@endphp
 @section('content')
     <div class="container"
          style="background-color: white;border-radius: 10px;width: 73%;padding: 40px 40px 30px 40px;margin-top: 160px;">
@@ -62,9 +64,9 @@
 							<input type="password" class="form-control text-input" id="user_password" name="user_password" placeholder="">
 							<a href="#" class="forgot-password">Forgot your Password?</a>
 						</div>
-						<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
+						<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Register</button>
 
-					<p style="color: gray;margin-top: 30px;">Already Registered on Growcer <a href="{{ url('/web/login') }}"
+					<p style="color: gray;margin-top: 30px;">Already Registered on {{$settingData->name}} <a href="{{ url('/web/login') }}"
                                                                                   style="color:#FB641B; ">LOGIN</a></p>
 				</div>
 

@@ -16,6 +16,11 @@ class Helper
         return DB::table('categories')->where('parent','<>',0)->where('level',$level)->get();
     }
 
+    public static function get_settings()
+    {
+        return DB::table('tbl_web_setting')->first();
+    }
+
     public static function get_product_categories($level)
     {
        $categories = DB::table('product as p')->select('c.title','c.slug','c.cat_id')

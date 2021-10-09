@@ -1,7 +1,10 @@
 <header class="header-style-1">
 @php
     $category = Helper::get_categories(1);
+    $settingData = Helper::get_settings();
     $currencySymbol = '₹';
+    $webLogin = session('webLogin', false);
+    //dd($webLogin);
 @endphp
   <!-- ============================================== TOP MENU ============================================== -->
   <div class="top-bar animate-dropdown">
@@ -9,11 +12,19 @@
       <div class="header-top-inner">
         <div class="cnt-account">
           <ul class="list-unstyled">
-            <li class="myaccount"><a href="#"><span>My Account</span></a></li>
-            <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
-            <li class="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
-            <li class="check"><a href="#"><span>Checkout</span></a></li>
-            <li class="login"><a href="{{ url('/web/login') }}"><span>Login</span></a></li>
+              @if($webLogin==true)
+                  <li class="myaccount"><a href="#"><span>My Account</span></a></li>
+                  <li class="wishlist"><a href="#"><span>Wishlist</span></a></li>
+                  <li class="header_cart hidden-xs"><a href="#"><span>My Cart</span></a></li>
+                  <li class="check"><a href="#"><span>Checkout</span></a></li>
+              @endif
+
+              @if($webLogin==false)
+                <li class="login"><a href="{{ url('/web/login') }}"><span>Login</span></a></li>
+                <li class="register"><a href="{{ url('/web/sign-up') }}"><span>Register</span></a></li>
+              @else
+                 <li class="logout"><a href="{{ route('userlogout') }}"><span>Logout</span></a></li>
+              @endif
           </ul>
         </div>
         <!-- /.cnt-account -->
